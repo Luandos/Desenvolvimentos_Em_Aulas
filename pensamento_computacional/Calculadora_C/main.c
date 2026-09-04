@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include <stdbool.h>
-
+// Funções
 char menu(){
     printf("\n===== CALCULADORA =====\n");
     printf(" 1  - Soma\n");
@@ -26,7 +25,7 @@ char menu(){
 
 
 float trigonometria(){
-    float n1, n2, resultado;
+    float n1, n2, resultado, pi = 3.14159265358979323846;
     int resp;
     printf("Qual função trigonometrica? [SENO(1)/COSSENO(2)/TANGENTE(3)/GRAUS(4)/RADIANOS(5)]");
     scanf("%d", &resp);
@@ -50,14 +49,12 @@ float trigonometria(){
             printf("O Tangente é:  %.2f", resultado);
             break;
         case 4:
-            #define pi 3.14159265358979323846
             printf("Digite numero para conversão em graus: \n");
             scanf("%f", &n1);
             resultado=n1*(pi/180);
             printf("O numero em grau é:  %.2f", resultado);
             break;
         case 5:
-            #define pi 3.14159265358979323846
             printf("Digite numero para conversão em radiano: \n");
             scanf("%f", &n1);
             resultado=n1*(180/pi);
@@ -228,6 +225,7 @@ float soma(){
      printf("A soma dos numeros %.2f", soma);
 }
 
+//Principal
 int main()
 {
     int opcao;
@@ -256,6 +254,9 @@ int main()
             default: printf("Opcao invalida\n");
         }
  
+    } while(opcao != 0);
+    return 0;
+}
     } while(opcao != 0);
     return 0;
 }
