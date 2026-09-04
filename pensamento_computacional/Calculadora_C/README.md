@@ -49,7 +49,6 @@ calculadora/
 ```
 
 - `main.c` — implementação da calculadora em C.
-- `calculadora_cientifica_Completa.fprg` — arquivo do projeto/modelagem da calculadora no Flowgorithm.
 - `README.md` — documentação do projeto.
 
 ## 🚀 Como executar
