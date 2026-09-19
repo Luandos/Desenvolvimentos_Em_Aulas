@@ -1,154 +1,219 @@
-# 🌡️ Monitoramento de Temperatura de Máquina
+Monitoramento de Temperatura de Máquina
 
-Programa desenvolvido em **C** para realizar o monitoramento da temperatura de uma máquina a partir de um limite definido pelo usuário.
+1. Identificação
 
-Durante a execução, o sistema recebe várias medições de temperatura, identifica os menores e maiores valores registrados, calcula a média das temperaturas e encerra o monitoramento quando o limite é ultrapassado por **3 medições consecutivas**.
+Aluno: Luan Dos Santos Rodrigues
+Disciplina: Algoritimos e Pensamento Computacional
+Professora: Profa. Karla Sartin
+Título do projeto: Monitoramento de Temperatura de Máquina
 
-## 📋 Funcionalidades
+2. Objetivo
 
-- Definição do limite de temperatura pelo usuário
-- Leitura contínua da temperatura atual
-- Validação da entrada de dados numéricos
-- Identificação da menor temperatura registrada
-- Identificação da maior temperatura registrada
-- Cálculo da temperatura média
-- Contagem da quantidade de medições realizadas
-- Monitoramento de ultrapassagens consecutivas do limite
-- Encerramento automático após 3 ultrapassagens consecutivas
+O objetivo deste projeto é desenvolver um programa em linguagem C capaz de monitorar a temperatura de uma máquina a partir de um limite definido pelo usuário.
 
-## ⚙️ Como funciona
+O programa permite acompanhar diferentes leituras de temperatura e identificar situações em que a temperatura permanece acima do limite por três medições consecutivas. Nessa situação, o monitoramento é encerrado automaticamente, simulando uma condição de alerta para uma possível elevação excessiva da temperatura.
 
-Primeiramente, o programa solicita ao usuário um **limite de temperatura**.
+3. Funcionamento do programa
 
-Em seguida, são realizadas medições sucessivas. Sempre que uma temperatura ultrapassa o limite definido, um contador de ocorrências é incrementado.
+Definição do limite de temperatura
 
-Quando uma temperatura que não ultrapassa o limite é registrada, esse contador é zerado. Dessa forma, o programa somente encerra a execução quando o limite é ultrapassado em **3 medições consecutivas**.
+Ao iniciar o programa, o usuário informa o limite máximo de temperatura que será utilizado durante o monitoramento.
 
-Ao final do monitoramento, são apresentados:
+A entrada é armazenada na variável limite e utilizada posteriormente para comparar cada nova temperatura registrada.
 
-- Menor temperatura registrada
-- Maior temperatura registrada
-- Média das temperaturas
-- Quantidade total de medições realizadas
+Leitura das temperaturas
 
-## 🛠️ Tecnologias utilizadas
+Após definir o limite, o programa solicita repetidamente a temperatura atual da máquina.
 
-- **Linguagem C**
-- Biblioteca padrão `stdio.h`
-- Compilador C, como GCC
+Cada valor informado é armazenado na variável temp e utilizado para:
 
-## 💻 Exemplo de execução
+acumular a soma das temperaturas;
 
-```text
-Iniciando...
-Digite o limite de temperatura: 80
+identificar a menor temperatura registrada;
 
-Digite a temperatura atual: 75
-Digite a temperatura atual: 82
-Digite a temperatura atual: 85
-Digite a temperatura atual: 90
+identificar a maior temperatura registrada;
+
+calcular posteriormente a média;
+
+verificar se a temperatura ultrapassou o limite definido.
+
+Tratamento de valores inválidos
+
+O programa verifica se os valores digitados são numéricos utilizando scanf().
+
+Quando o usuário informa um valor inválido, o programa exibe uma mensagem de erro e continua solicitando uma nova entrada até que um número seja informado.
+
+Esse tratamento é utilizado tanto para o limite de temperatura quanto para as temperaturas monitoradas.
+
+Identificação de temperaturas acima do limite
+
+Após cada leitura, a temperatura atual é comparada com o limite utilizando a condição:
+
+if (temp > limite)
+
+Quando a temperatura está acima do limite, o contador de ocorrências consecutivas (contli) é incrementado.
+
+Quando a temperatura não ultrapassa o limite, o contador é zerado:
+
+else {
+    contli = 0;
+}
+
+Contagem de temperaturas consecutivas
+
+O contador contli registra quantas temperaturas consecutivas ficaram acima do limite.
+
+Por exemplo, considerando um limite de 80°C:
+
+81°C → 1 ocorrência
+85°C → 2 ocorrências
+79°C → contador volta para 0
+82°C → 1 ocorrência
+
+Isso significa que apenas temperaturas acima do limite em sequência são consideradas para o encerramento do monitoramento.
+
+Condição de encerramento
+
+O monitoramento continua enquanto:
+
+while (contli != 3)
+
+Quando o contador chega a 3, o programa informa que o limite foi excedido e encerra o processo de monitoramento.
+
+Ao final, são apresentados:
+
+menor temperatura registrada;
+
+maior temperatura registrada;
+
+média das temperaturas;
+
+quantidade de medições realizadas.
+
+4. Estruturas de repetição utilizadas
+
+O programa utiliza a estrutura while em três pontos principais.
+
+Validação do limite
+
+while (scanf("%f", &limite) != 1)
+
+Esse while é utilizado para repetir a entrada enquanto o valor informado não for um número válido.
+
+Validação das temperaturas
+
+while (scanf("%f", &temp) != 1)
+
+O mesmo princípio é aplicado às temperaturas monitoradas. Enquanto a entrada for inválida, o programa continua solicitando um valor correto.
+
+Monitoramento principal
+
+while (contli != 3)
+
+Esse é o laço responsável por manter o monitoramento em execução. A condição é testada antes de cada nova iteração e o programa permanece no laço enquanto não houver três temperaturas consecutivas acima do limite.
+
+Por que foi utilizado while?
+
+A escolha do while foi adequada porque a quantidade de repetições não é definida previamente. O programa precisa continuar recebendo temperaturas até que uma determinada condição seja alcançada.
+
+Além disso, no monitoramento principal, é importante verificar a condição de encerramento antes de iniciar uma nova leitura. Quando contli chega a 3, o laço deixa de executar e o programa passa para a apresentação dos resultados.
+
+O projeto não utiliza do...while, pois não houve uma situação em que fosse necessário garantir a execução do bloco pelo menos uma vez antes de verificar a condição.
+
+5. Como executar
+
+Compilação
+
+Considerando o arquivo main(1).c, utilize:
+
+gcc "main(1).c" -o monitoramento
+
+Caso o arquivo seja renomeado para monitoramento.c, a compilação pode ser feita com:
+
+gcc monitoramento.c -o monitoramento
+
+Execução
+
+Linux/macOS:
+
+./monitoramento
+
+Windows:
+
+monitoramento.exe
+
+6. Testes realizados
+
+Teste 1 — Validação de entradas inválidas
+
+Objetivo: verificar se o programa rejeita valores que não são numéricos.
+
+Foi informado um texto (abc) no campo do limite e, posteriormente, outro texto (abc) durante uma leitura de temperatura.
+
+Resultado obtido: o programa identificou as entradas inválidas e solicitou novamente um número válido.
+
+Exemplo da resposta apresentada:
+
+Valor invalido! Digite um numero:
+Valor invalido, tente novamente:
+
+Depois das entradas válidas, o monitoramento continuou normalmente.
+
+Teste 2 — Temperaturas acima do limite, porém não consecutivas
+
+Limite utilizado: 80°C
+
+Sequência de temperaturas utilizada:
+
+81°C
+79°C
+82°C
+78°C
+90°C
+79°C
+91°C
+85°C
+86°C
+87°C
+
+Nesse teste, algumas temperaturas ultrapassaram 80°C, mas foram interrompidas por temperaturas iguais ou inferiores ao limite. O contador de ocorrências consecutivas foi, portanto, zerado sempre que isso aconteceu.
+
+Resultado obtido: o programa não encerrou nas primeiras ultrapassagens isoladas. O encerramento ocorreu somente depois das temperaturas 85°C, 86°C e 87°C, que formaram três ocorrências consecutivas acima do limite.
+
+Resultados apresentados ao final:
+
+Menor temperatura: 78.00°C
+Maior temperatura: 91.00°C
+Media: 83.44
+Quantidade de vezes monitorado: 9
+
+Teste 3 — Três temperaturas consecutivas acima do limite
+
+Limite utilizado: 80°C
+
+Sequência de temperaturas utilizada:
+
+81°C
+82°C
+83°C
+
+As três temperaturas ficaram acima do limite de 80°C.
+
+Resultado obtido: após a terceira leitura consecutiva acima do limite, o programa exibiu a mensagem de encerramento automático:
 
 Limite exedido, programa irá se encerrar ...
 
-Resultados
-Menor temperatura: 75.00°C
-Maior temperatura: 90.00°C
-Media: 83.00
-Quantidade de vezes monitorado: 4
-```
+Resultados apresentados:
 
-## 🚀 Como executar
+Menor temperatura: 81.00°C
+Maior temperatura: 83.00°C
+Media: 82.00
+Quantidade de vezes monitorado: 3
 
-### 1. Clone o repositório
+Conclusão sobre a escolha da estrutura de repetição
 
-```bash
-git clone URL_DO_SEU_REPOSITORIO
-cd NOME_DO_REPOSITORIO
-```
+Foi escolhida a estrutura while porque o número de repetições do monitoramento não é conhecido antecipadamente. O programa deve continuar recebendo temperaturas enquanto a condição de encerramento não for atingida.
 
-### 2. Compile o programa
+A diferença entre testar a condição antes ou depois da execução foi importante principalmente no laço principal. Com while, a condição contli != 3 é verificada antes de cada nova execução do bloco. Dessa maneira, quando o contador chega a três temperaturas consecutivas acima do limite, o programa não realiza uma nova leitura e passa diretamente para a apresentação dos resultados.
 
-Utilizando o GCC:
-
-```bash
-gcc "main(1).c" -o monitoramento
-```
-
-### 3. Execute
-
-No Linux/macOS:
-
-```bash
-./monitoramento
-```
-
-No Windows:
-
-```bash
-monitoramento.exe
-```
-
-## 🧠 Conceitos praticados
-
-Este projeto utiliza conceitos fundamentais de programação em C, como:
-
-- Variáveis e tipos de dados
-- Entrada e saída com `scanf()` e `printf()`
-- Estrutura de repetição `while`
-- Estruturas condicionais `if` e `else`
-- Operadores relacionais
-- Acumulação de valores
-- Cálculo de média
-- Controle de contadores
-- Validação de entrada de dados
-- Análise de valores mínimo e máximo
-
-## 🔄 Fluxo do programa
-
-```text
-Início
-  ↓
-Define o limite de temperatura
-  ↓
-Lê uma nova temperatura
-  ↓
-Atualiza soma, menor e maior temperatura
-  ↓
-Temperatura acima do limite?
-  ├── Sim → Incrementa contador de ocorrências
-  │           ↓
-  │        3 ocorrências consecutivas?
-  │           ├── Sim → Encerra monitoramento
-  │           └── Não → Nova leitura
-  │
-  └── Não → Zera contador de ocorrências
-              ↓
-           Nova leitura
-  ↓
-Calcula a média
-  ↓
-Exibe os resultados
-  ↓
-Fim
-```
-
-## 🚧 Possíveis melhorias
-
-- [ ] Corrigir e padronizar mensagens exibidas pelo programa
-- [ ] Adicionar unidade `°C` à apresentação da média
-- [ ] Permitir escolher a quantidade de medições
-- [ ] Registrar as medições em arquivo
-- [ ] Criar alertas para diferentes níveis de temperatura
-- [ ] Melhorar o tratamento de valores inválidos
-- [ ] Permitir monitoramento em tempo real com sensores físicos
-- [ ] Separar o código em funções para melhorar a organização
-
-## 📌 Observação
-
-Este projeto possui caráter acadêmico e foi desenvolvido para praticar conceitos fundamentais da linguagem C aplicados a um cenário de monitoramento de temperatura.
-
-## 👨‍💻 Autor
-
-**Luan Dos Santos**
-
-Projeto desenvolvido para prática e evolução dos conhecimentos em programação e linguagem C.
+Nos laços utilizados para validação das entradas, o while também é adequado porque a repetição só precisa ocorrer enquanto o valor informado for inválido.
