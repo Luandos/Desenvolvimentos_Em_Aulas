@@ -1,9 +1,9 @@
-# 🌡️ Monitoramento de Temperatura de Máquina
+# Monitoramento de Temperatura de Máquina
 
 ## 1. Identificação
 
-**Aluno:** [Nome do aluno]  
-**Disciplina:** [Nome da disciplina]  
+**Aluno:** Luan Dos Santos Rodrigues  
+**Disciplina:** Algoritmos E Pensamento Computacional  
 **Professora:** Profa. Karla Sartin  
 **Título do projeto:** Monitoramento de Temperatura de Máquina
 
